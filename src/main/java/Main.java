@@ -9,5 +9,16 @@ public class Main {
         myLinkedList.add(60,5);
 
         myLinkedList.display();
+
+        myLinkedList.removeFirst();
+
+        myLinkedList.display();
+
+        myLinkedList.removeLast();
+
+        myLinkedList.display();
+
+        myLinkedList.remove(2);
+        myLinkedList.display();
     }
 }

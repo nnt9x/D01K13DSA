@@ -71,6 +71,63 @@ public class MyLinkedList {
         }
     }
 
+    public void removeFirst() {
+        // Kiểm tra có rỗng hay ko?
+        if (isEmpty()) {
+            throw new RuntimeException("Danh sách rỗng!");
+        }
+        // Bước 1: Lấy ra head hiện tại
+        Node currentHead = head;
+        Node nextHead = currentHead.getNext();
+        currentHead.setNext(null);
+
+        // Buoc 2: Gan lai head
+        head = nextHead;
+        size--;
+    }
+
+    public void removeLast() {
+        // Y tuong: tim ra node gần cuối
+        // Gán node gần cuối có next = null => trở thành node cuối
+        Node tmp = head;
+        while (true) {
+            if (tmp.getNext().getNext() == null) {
+                break;
+            }
+            tmp = tmp.getNext();
+        }
+        tmp.setNext(null);
+        size--;
+    }
+
+    public void remove(int position) {
+        if (position == 0) {
+            removeFirst();
+        } else if (position == size - 1) {
+            removeLast();
+        } else {
+            Node previousNode = null, currentNode = null, nextNode = null; // i-1, i, i + 1
+            for (int i = 0; i <= position - 1; i++) {
+                if (previousNode == null) {
+                    previousNode = head;
+                } else {
+                    previousNode = previousNode.getNext();
+                }
+            }
+            currentNode = previousNode.getNext();
+            nextNode = currentNode.getNext();
+
+            previousNode.setNext(nextNode);
+            currentNode.setNext(null);
+            size--;
+        }
+    }
+
+    public boolean isEmpty() {
+        if (size == 0) return true;
+        return false;
+    }
+
     public void display() {
         Node n = head;
         while (true) {
